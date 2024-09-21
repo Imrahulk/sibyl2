@@ -1,0 +1,120 @@
+<div class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div
+      class="container-fluid d-flex justify-content-between align-items-center"
+    >
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img
+          src="assets/DLogo.png"
+          style="width: 157px; height: auto; margin-right: 8px"
+        />
+      </a>
+      <span class="mx-auto" style="font-size: 34px; font-weight: bold">
+        Instagram API Integration POC
+      </span>
+    </div>
+  </nav>
+
+  <div
+    class="flex-grow-1 overflow-auto p-3 border border-secondary rounded shadow-sm"
+  >
+    <main
+      class="d-flex flex-column"
+      style="max-height: calc(100vh - 150px); overflow-y: auto"
+    >
+      <section
+        style="min-width: 600px"
+        class="d-flex flex-column align-items-center"
+      >
+        <label class="mb-2">Instagram Login</label>
+        <button class="btn btn-primary" (click)="login()">Login</button>
+      </section>
+
+      <section *ngIf="authCode" style="min-width: 600px">
+        <h4>Authorization Code</h4>
+        <div class="border p-2 rounded bg-light" style="min-height: 40px">
+          {{ authCode }}
+        </div>
+        <button class="btn btn-secondary mt-4" (click)="fetchAccessToken()">
+          Fetch Access Token
+        </button>
+
+        <div *ngIf="accessToken">
+          <h4 class="mt-4">Access Token</h4>
+          <div
+            class="border p-2 rounded bg-light"
+            style="min-height: 40px; word-wrap: break-word"
+          >
+            {{ accessToken }}
+          </div>
+        </div>
+      </section>
+
+      <section *ngIf="accessToken" style="min-width: 600px">
+        <button class="btn btn-success mt-4" (click)="fetchUserDetails()">
+          Fetch User Details
+        </button>
+        <div *ngIf="user">
+          <h4 class="mt-4">User Details:</h4>
+          <div
+            class="border p-2 rounded bg-light"
+            style="min-height: 40px; word-wrap: break-word"
+          >
+            <p>ID: {{ user.id }}</p>
+            <p>Username: {{ user.username }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section *ngIf="accessToken" style="min-width: 600px">
+        <button class="btn btn-warning mt-4" (click)="fetchPostDetails()">
+          Fetch Feed Data
+        </button>
+        <div *ngIf="postData.length > 0">
+          <h4 class="mt-4">Post Details:</h4>
+          <!-- <pre>{{ postData | json }}</pre> -->
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Caption</th>
+                  <th>Media Type</th>
+                  <th>Media</th>
+                  <th>Permalink</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let post of postData">
+                  <td>{{ post.id }}</td>
+                  <td>{{ post.caption ? post.caption : "N/A" }}</td>
+                  <td>{{ post.media_type }}</td>
+                  <td>
+                    <img
+                      [src]="post.media_url"
+                      alt="Media"
+                      style="width: 100px; height: auto"
+                    />
+                  </td>
+                  <td>
+                    <a [href]="post.permalink" target="_blank">View Post</a>
+                  </td>
+                  <td>{{ post.timestamp | date : "short" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="bg-light text-center text-lg-start mt-auto sticky-bottom">
+    <div class="container p-4">
+      <div class="text-center">
+        <p>&copy; © 2024 All Rights Reserved, DELPHI Consulting</p>
+      </div>
+    </div>
+  </footer>
+</div>
