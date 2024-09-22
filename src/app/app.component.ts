@@ -12,7 +12,7 @@ import { User, Post } from './app-model';
 })
 export class AppComponent {
   clientId = '458808227161899'; // Add your Instagram App client_id
-  redirectUri = 'https://localhost:4200/'; // Set the same as Instagram app settings
+  redirectUri = 'https://imrahulk.github.io/sibyl2/'; // Set the same as Instagram app settings
   clientSecret = '2a84699cf327d52e4f62fdff10dc4a0d'; // Add your Instagram client_secret
 
   authCode: string | null = null;

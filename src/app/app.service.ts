@@ -8,7 +8,7 @@ import { Post, User } from './app-model';
 })
 export class AppService {
   private clientId = '458808227161899'; // Your Instagram App client_id
-  private redirectUri = 'https://localhost:4200/'; // Same as Instagram app settings
+  private redirectUri = 'https://imrahulk.github.io/sibyl2/'; // Same as Instagram app settings
   private clientSecret = '2a84699cf327d52e4f62fdff10dc4a0d';
 
   constructor(private http: HttpClient) {}
